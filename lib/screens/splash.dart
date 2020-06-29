@@ -49,26 +49,25 @@ class _SplashScreenState extends State<SplashScreen> {
 
       version = firebaseModel.version;
       url = firebaseModel.url;
-    });
-
-    Timer(Duration(seconds: 2), () {
-      if (version == appVersion) {
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => HomeScreen(
-                      appVersion: appVersion,
-                    )),
-            (Route<dynamic> route) => false);
-      } else {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return UpdateCheckDialog(
-                updateUrl: url,
-              );
-            });
-      }
+      Timer(Duration(seconds: 2), () {
+        if (version == appVersion) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) => HomeScreen(
+                        appVersion: appVersion,
+                      )),
+              (Route<dynamic> route) => false);
+        } else {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return UpdateCheckDialog(
+                  updateUrl: url.toString(),
+                );
+              });
+        }
+      });
     });
   }
 
